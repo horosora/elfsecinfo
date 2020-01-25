@@ -11,10 +11,14 @@ import(
 func main() {
 	f := flag.String("f", "", "file")
 	flag.Parse()
-	checkSSP(*f)
-	checkNX(*f)
-	checkPIE(*f)
-	checkRELRO(*f)
+	checkSec(*f)
+}
+
+func checkSec(path string) {
+	checkSSP(path)
+	checkNX(path)
+	checkPIE(path)
+	checkRELRO(path)
 }
 
 func checkSSP(path string) {
