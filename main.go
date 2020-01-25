@@ -11,7 +11,11 @@ import(
 func main() {
 	f := flag.String("f", "", "file")
 	flag.Parse()
-	checkSec(*f)
+	if *f == "" {
+		fmt.Println("\"-h\" for help")
+	} else {
+		checkSec(*f)
+	}
 }
 
 func checkSec(path string) {
