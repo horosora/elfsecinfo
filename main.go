@@ -14,6 +14,7 @@ func main() {
 	checkSSP(*f)
 	checkNX(*f)
 	checkPIE(*f)
+	checkRELRO(*f)
 }
 
 func checkSSP(path string) {
@@ -56,4 +57,24 @@ func checkPIE(path string) {
 		}
 	}
 	fmt.Println("[+] PIE: \x1b[31moff\x1b[37m")
+}
+
+func checkRELRO(path string) {
+	out, err := exec.Command("readelf", "-l", path).Output()
+	if err != nil {
+		log.Fatal("checkRELRO: ", err)
+	}
+	if strings.Index(string(out), "GNU_RELRO") != -1 {
+		out, err := exec.Command("readelf", "-d", path).Output()
+		if err != nil {
+			log.Fatal("checkRELRO: ", err)
+		}
+		if (strings.Index(string(out), "BIND_NOW")) != -1 {
+			fmt.Println("[+] RELRO: \x1b[32mon\x1b[37m")
+		} else {
+			fmt.Println("[+] RELRO: \x1b[33mpartial\x1b[37m")
+		}
+	} else {
+		fmt.Println("[+] RELRO: \x1b[31moff\x1b[37m")
+	}
 }
