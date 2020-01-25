@@ -28,7 +28,6 @@ func checkSSP(path string) {
 }
 
 func checkNX(path string) {
-	//cmd := fmt.Sprintf("readelf -W -l %s | grep 'GNU_STACK' | grep 'RWE'", path)
 	out, err := exec.Command("readelf", "-W", "-l", path).Output()
 	if err != nil {
 		log.Fatal("checkNX: ", err)
