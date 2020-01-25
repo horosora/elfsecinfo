@@ -27,9 +27,9 @@ func checkSSP(path string) {
 		log.Fatal("checkSSP: ", err)
 	}
 	if strings.Index(string(out), "__stack_chk_fail") != -1 {
-		fmt.Println("[+] SSP:   \x1b[32mon\x1b[37m")
+		fmt.Println("[+]   SSP: \x1b[32mon\x1b[37m")
 	} else {
-		fmt.Println("[+] SSP:   \x1b[31moff\x1b[37m")
+		fmt.Println("[+]   SSP: \x1b[31moff\x1b[37m")
 	}
 }
 
@@ -41,11 +41,11 @@ func checkNX(path string) {
 	res := strings.Split(string(out), "\n")
 	for i := 0; i < len(res); i++ {
 		if strings.Index(string(out), "GNU_STACK") != -1 && strings.Index(string(out), "RWE") != -1 {
-			fmt.Println("[+] NX:    \x1b[31moff\x1b[37m")
+			fmt.Println("[+]    NX: \x1b[31moff\x1b[37m")
 			return
 		}
 	}
-	fmt.Println("[+] NX:    \x1b[32mon\x1b[37m")
+	fmt.Println("[+]    NX: \x1b[32mon\x1b[37m")
 }
 
 func checkPIE(path string) {
@@ -56,11 +56,11 @@ func checkPIE(path string) {
 	res := strings.Split(string(out), "\n")
 	for i := 0; i < len(res); i++ {
 		if strings.Index(string(out), "Type") != -1 && strings.Index(string(out), "Shared object file") != -1 {
-			fmt.Println("[+] PIE:   \x1b[32mon\x1b[37m")
+			fmt.Println("[+]   PIE: \x1b[32mon\x1b[37m")
 			return
 		}
 	}
-	fmt.Println("[+] PIE:   \x1b[31moff\x1b[37m")
+	fmt.Println("[+]   PIE: \x1b[31moff\x1b[37m")
 }
 
 func checkRELRO(path string) {
