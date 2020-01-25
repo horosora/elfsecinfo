@@ -34,7 +34,7 @@ func checkNX(path string) {
 	}
 	res := strings.Split(string(out), "\n")
 	for i := 0; i < len(res); i++ {
-		if strings.Index(string(out), "GNU_STACK") != -1 && strings.Index(string(out), "RWE") != -1{
+		if strings.Index(string(out), "GNU_STACK") != -1 && strings.Index(string(out), "RWE") != -1 {
 			fmt.Println("[+] NX: \x1b[31moff\x1b[37m")
 			return
 		}
